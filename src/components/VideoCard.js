@@ -1,12 +1,11 @@
 import React from 'react'
 
 const VideoCard = ({info})=> {
-  console.log(info, 'info')
   const {snippet, statistics} = info;
   const { title, channelTitle, thumbnails} = snippet;
 
   return (
-    <div className='col-span-3 p-1'>
+    <div className='p-1 h-full'>
       <div className='p-2 bg-white h-full shadow-lg rounded-md'>
       <img src={thumbnails?.high?.url} className="rounded-lg" alt="Thumbnail_Image"/>
       <div className='py-2'>

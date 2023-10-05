@@ -7,6 +7,9 @@ import { getNumber } from '../utils/baseHelper';
 import { GOOGLE_API_KEY } from '../utils/constants';
 import {PiShareFatThin} from 'react-icons/pi';
 import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai';
+import { HiDownload } from 'react-icons/hi'
+import CommentsList from './CommentsList';
+import RelatedVideos from './RelatedVideos';
 
 function WatchPage() {
   const [ searchParams] = useSearchParams();
@@ -36,18 +39,16 @@ function WatchPage() {
     setChannelInfo(channelInfo?.items[0])
   }
   
-  console.log(videoDetail, channelInfo, 'hello')
-
   return !videoDetail ? null :  (
     <div className='grid grid-cols-12 col-span-12 p-2'>
-      <div className='rounded-lg col-span-7 overflow-hidden'>
+      <div className='rounded-lg col-span-8 overflow-hidden'>
         <ReactPlayer 
           url={"https://www.youtube.com/watch?v="+videoId} 
           width={"100%"}
           height="500px"
-          className="mb-2"
+          className="mb-4"
         />
-        <h3 className='text-gray-600 font-bold text-2xl mt-2'>{videoDetail?.snippet?.title}</h3>
+        <h3 className='text-gray-600 font-bold text-2xl mt-4'>{videoDetail?.snippet?.title}</h3>
         <div className='flex flex-wrap justify-between items-center py-2 my-2'>
           <div className='flex'>
             <img 
@@ -60,26 +61,34 @@ function WatchPage() {
               <p className='text-sm text-gray-500'> {channelInfo && getNumber(channelInfo?.statistics?.subscriberCount)} subscribers</p>
             </div>
           </div>
-          <button className='bg-white shadow-md text-black border-[1px] flex items-center rounded-full px-3 py-2 text-sm'>
-            Subscribe
-          </button>
+          
           <div className='flex'>
-            <button className='flex items-center bg-white shadow-md text-black border-[1px] rounded-l-full px-3 py-2 text-sm border-r-[1px]'>
-              <AiOutlineLike className='mr-1'/>{videoDetail && getNumber(videoDetail?.statistics?.likeCount)} Likes
+            <button className='bg-white ml-2 shadow-md text-black border-[1px] flex items-center rounded-full px-3 py-2 text-sm'>
+              Subscribe
+            </button>
+            <button className='flex ml-2 items-center bg-white shadow-md text-black border-[1px] rounded-l-full px-3 py-2 text-sm border-r-[1px]'>
+              <AiOutlineLike className='mr-1'/>{videoDetail && getNumber(videoDetail?.statistics?.likeCount)}
             </button>
             <button className='flex items-center bg-white shadow-md text-black border-[1px] rounded-r-full px-3 py-2 text-sm'>
               <AiOutlineDislike/>
             </button>
+            <button className='flex ml-2 items-center bg-white shadow-md text-black border-[1px] rounded-full px-3 py-2 text-sm'>
+              <PiShareFatThin className='mr-1'/> Share
+            </button>
+            <button className='flex ml-2 items-center bg-white shadow-md text-black border-[1px] rounded-full px-3 py-2 text-sm'>
+              <HiDownload className='mr-1'/> Download
+            </button>
           </div>
-          <button className='flex items-center bg-white shadow-md text-black border-[1px] rounded-full px-3 py-2 text-sm'>
-            <PiShareFatThin className='mr-1'/> Share
-          </button>
         </div>
         <div className='border-[1px] shadow-md p-2 rounded-lg text-sm'>
           {videoDetail?.snippet?.description}
         </div>
+        <div className='m-3'>
+          <CommentsList videoId={videoId}/>
+        </div>
       </div>
-      <div className='col-span-5'>
+      <div className='col-span-4 px-2'>
+        <RelatedVideos id={videoDetail?.snippet?.channelId}/>
       </div>
     </div>
   )

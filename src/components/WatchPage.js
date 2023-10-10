@@ -15,7 +15,7 @@ function WatchPage() {
   const [ searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const [videoDetail, setVideoDetail] = useState();
-  const [channelInfo, setChannelInfo]=useState()
+  const [channelInfo, setChannelInfo]=useState();
 
   useEffect(()=>{
     dispatch(closeMenu())
@@ -23,20 +23,22 @@ function WatchPage() {
   },[]);
 
   useEffect(()=>{
-    getChannel()
+    if(videoDetail?.snippet?.channelId){
+      getChannel()
+    }
   },[videoDetail])
   
   const videoId = searchParams.get("v");
   const getVideo = async()=>{
     const data = await fetch("https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id="+searchParams.get("v")+ "&key="+ GOOGLE_API_KEY);
     const jsonData = await data.json();
-    setVideoDetail(jsonData?.items[0]);
+    setVideoDetail(jsonData.items[0]);
   }
 
   const getChannel = async()=>{
     const data =  await fetch("https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id="+videoDetail?.snippet?.channelId+"&key="+ GOOGLE_API_KEY);
     const channelInfo = await data.json();
-    setChannelInfo(channelInfo?.items[0])
+    setChannelInfo(channelInfo.items[0])
   }
   
   return !videoDetail ? null :  (
@@ -47,6 +49,7 @@ function WatchPage() {
           width={"100%"}
           height="500px"
           className="mb-4"
+          controls
         />
         <h3 className='text-gray-600 font-bold text-2xl mt-4'>{videoDetail?.snippet?.title}</h3>
         <div className='flex flex-wrap justify-between items-center py-2 my-2'>

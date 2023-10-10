@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Link } from "react-router-dom";
 import { YOUTUBE_RELATED_VIDEO } from '../utils/constants';
 import RelatedVideo from './RelatedVideo';
 
@@ -17,7 +18,9 @@ const RelatedVideos = ({id}) => {
   return  !relatedVideos ? null :(
     <>
     {relatedVideos?.items?.map((item)=>(
-      <RelatedVideo key={item?.id} item={item}/>
+      <Link to={"/watch?v="+ item?.contentDetails?.upload?.videoId }>
+        <RelatedVideo key={item?.id} item={item}/>
+      </Link>
     ))}
     </>
   );

@@ -19,7 +19,9 @@ const Comment = ({data}) => {
           <div className='flex items-center mr-2 text-sm'>
             <BiDislike className='mr-1 w-[35px] h-[35px] p-2 rounded-full hover:cursor-pointer hover:shadow-md hover:bg-gray-200'/> {data?.snippet?.topLevelComment?.snippet?.dislikeCount}
           </div>
-          <button className='px-3 h-[25px] text-xs rounded-full border-[1px] hover:shadow-md hover:bg-gray-200'>Reply</button>
+          <button className='px-3 h-[25px] text-xs rounded-full border-[1px] hover:shadow-md hover:bg-gray-200'>
+            Reply
+          </button>
         </div>
       </div>
     </div>

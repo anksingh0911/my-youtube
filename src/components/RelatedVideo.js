@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 
 const RelatedVideo = ({item}) => {
-  console.log(item, 'item')
   return (
     <div className='grid grid-cols-12 border-b-[1px] p-2'>
         <div className='col-span-3'>

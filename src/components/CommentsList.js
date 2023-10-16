@@ -16,10 +16,10 @@ const CommentsList = ({videoId}) => {
   }
   return commentData?.length > 0 ? (
     <>
-    <h4 className='my-4 text-lg font-semibold text-gray-500'>Comments ({commentData?.length})</h4>
-    {commentData?.map((item)=>(
-      <Comment key={item?.id} data={item}/>
-    ))}
+      <h4 className='my-4 text-lg font-semibold text-gray-500'>Comments ({commentData?.length})</h4>
+      {commentData?.map((item)=>(
+        <Comment key={item?.id} data={item}/>
+      ))}
     </>
   ): '';
 };

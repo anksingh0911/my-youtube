@@ -10,6 +10,7 @@ import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai';
 import { HiDownload } from 'react-icons/hi'
 import CommentsList from './CommentsList';
 import RelatedVideos from './RelatedVideos';
+import LiveChat from './LiveChat';
 
 function WatchPage() {
   const [ searchParams] = useSearchParams();
@@ -83,7 +84,7 @@ function WatchPage() {
             </button>
           </div>
         </div>
-        <div className='border-[1px] shadow-md p-2 rounded-lg text-sm'>
+        <div className='border-[1px] shadow-md p-2 rounded-lg text-md line-clamp-3 leading-5'>
           {videoDetail?.snippet?.description}
         </div>
         <div className='m-3'>
@@ -91,6 +92,7 @@ function WatchPage() {
         </div>
       </div>
       <div className='col-span-4 px-2'>
+        <LiveChat/>
         <RelatedVideos id={videoDetail?.snippet?.channelId}/>
       </div>
     </div>

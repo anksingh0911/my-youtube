@@ -23,7 +23,6 @@ const Header = () => {
         getSearchSuggestion();
       }
     }, 200);
-
     return () => {
       clearTimeout(timer);
     };
@@ -31,7 +30,7 @@ const Header = () => {
   }, [searchInput]);
 
   const getSearchSuggestion = async () => {
-    const data = await fetch(YOUTUBE_SEARCH_SUGGESTIONS + searchInput);
+    const data = await fetch(YOUTUBE_SEARCH_SUGGESTIONS+searchInput);
     const apiResp = await data.json();
     setSearchSuggestion(apiResp[1]);
     dispatch(

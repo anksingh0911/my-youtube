@@ -6,4 +6,4 @@ export const COMMENTS_LIST= "https://youtube.googleapis.com/youtube/v3/commentTh
 
 export const YOUTUBE_RELATED_VIDEO= "https://youtube.googleapis.com/youtube/v3/activities?part=snippet%2CcontentDetails&maxResults=25&key="+GOOGLE_API_KEY +"&channelId="
 
-export const YOUTUBE_SEARCH_SUGGESTIONS = "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+export const YOUTUBE_SEARCH_SUGGESTIONS = "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";

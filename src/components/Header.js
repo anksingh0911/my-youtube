@@ -4,13 +4,15 @@ import { AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_SUGGESTIONS } from "../utils/constants";
 import { cacheResult } from "../utils/searchSlice";
+import { Link } from "react-router-dom";
+
 
 const Header = () => {
   const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
   const [searchSuggestion, setSearchSuggestion] = useState();
+  const [showSuggestion, setShowSuggestion] = useState(false)
   const searchCache = useSelector((store) => store?.search);
-  
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
@@ -60,16 +62,27 @@ const Header = () => {
             placeholder="Search"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
+            onFocus={(e)=> setShowSuggestion(true)}
+            onKeyDown={(e)=>{
+              if(e.keyCode=== 13){
+                window.location.href="/results?search_query="+searchInput;
+              }
+            }}
           />
           <button className="bg-gray-300 text-black-700 px-3 py-2 rounded-r-full">
             <AiOutlineSearch />
           </button>
-          {searchInput && (
+          {searchSuggestion && showSuggestion &&  (
             <div className="absolute mt-11 w-[50%] bg-white shadow-md py-2 rounded-md">
               <ul>
-                {searchSuggestion?.map((item) => (
-                  <li className="flex px-2 items-center text-md font-semibold border-b-[1px] py-2 hover:bg-gray-100">
-                    <AiOutlineSearch className="mr-2" /> {item}
+                {searchSuggestion?.map((item,index) => (
+                  <li className="w-full" 
+                  onClick={()=>(
+                    setSearchInput(item),
+                    setShowSuggestion(false)
+                    )}>
+                    <Link key={index} className="flex px-2 items-center text-md font-semibold border-b-[1px] py-2 hover:bg-gray-100" to={"/results?search_query="+item}><AiOutlineSearch className="mr-2" />{item}
+                    </Link>
                   </li>
                 ))}
               </ul>

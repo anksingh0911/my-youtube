@@ -16,7 +16,7 @@ const VideoContainer = () => {
   }
   return (
     <div className='grid grid-cols-12'>
-      {videos?.map((video)=><Link className='col-span-6 lg:col-span-3 md:col-span-4 sm:col-span-6' to={"/watch?v="+ video?.id }><VideoCard className="p-2" key={video?.id} info={video}/></Link>)}
+      {videos?.map((video)=><Link key={video?.id} className='col-span-6 lg:col-span-3 md:col-span-4 sm:col-span-6' to={"/watch?v="+ video?.id }><VideoCard className="p-2" key={video?.id} info={video}/></Link>)}
     </div>
   )
 }

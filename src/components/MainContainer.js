@@ -1,12 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import ButtonsList from "./ButtonsList";
-import VideoContainer from "./VideoContainer";
 
 const MainContainer = ()=>{
   return(
-    <div className="col-span-12 p-2">
+    <div className="col-span-10 p-2">
     <ButtonsList/>
-    <VideoContainer/>
+    <Outlet/>
     </div>
   )
 }

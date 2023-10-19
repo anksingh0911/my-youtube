@@ -1,20 +1,32 @@
-import { Children } from 'react';
+
 import { Provider } from 'react-redux';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Body from './components/Body';
 import Header from './components/Header';
 import MainContainer from './components/MainContainer';
+import SearchedVideoContainer from './components/SearchedVideoContainer';
+import VideoContainer from './components/VideoContainer';
 import WatchPage from './components/WatchPage';
 import store from './utils/store';
 
-const appRouter = createBrowserRouter([{
+export const appRouter = createBrowserRouter([{
   path:"/",
-  element:<Body/>,
+  element:<App/>,
   children:[
     { 
       path:"/",
-      element:<MainContainer/>
+      element:<MainContainer/>,
+      children:[
+        {
+          path: "/",
+          element:<VideoContainer/>
+        },
+        {
+          path: "results",
+          element:<SearchedVideoContainer/>
+        }
+      ]
     },
     {
       path:"watch",
@@ -24,13 +36,11 @@ const appRouter = createBrowserRouter([{
 }])
 function App() {
   return (
-    <Provider store={store}>
+    
       <div>
         <Header/>
-        <RouterProvider router={appRouter}/>
-        
+        <Body/>
       </div>
-    </Provider>
       
   );
 }

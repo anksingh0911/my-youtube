@@ -1,43 +1,73 @@
-import React  from "react";
+import React from "react";
 import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 
-const Sidebar = ()=>{
-  const isMenuOpen  = useSelector(store=> store.app.isMenuOpen);
-  if(isMenuOpen === false) return null;
-
-  return(
-    <div className="col-span-2 w-48 p-2 shadow-md bg-white">
+const Sidebar = () => {
+  const location = useLocation();
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+  const isDark = useSelector((store)=>store?.app?.isDark)
+  console.log(isDark)
+  if (isMenuOpen === false) return null;
+  
+  return (
+    <div
+      className={
+        location?.pathname === "/watch" ? `${`absolute top-18 left-0 w-[250px] p-2 shadow-md bg-white ${isDark ? "dark shadow-white": ""}`}`
+          : `${`col-span-2 w-full p-2 bg-white ${isDark ? "dark shadow-white shadow-md" : "shadow-md"}`}`
+      }
+      
+    >
+      <ul className="mb-2">
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          Home
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          Shorts
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          Library
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          History
+        </li>
+      </ul>
+      <h3 className="font-bold">Subscription</h3>
       <ul className="pl-1 mb-2">
-      <li>Home</li>
-      <li>Shorts </li>
-      <li>Library</li>
-      <li>History</li>
-    </ul>
-    <h3 className="font-bold">Subscription</h3>
-    <ul className="pl-1 mb-2">
-      <li>Music</li>
-      <li>Sports</li>
-      <li>Gaming</li>
-      <li>Movies</li>
-      <li>News</li>
-    </ul>
-    <h3 className="font-bold">Watch Later</h3>
-    <ul className="pl-1 mb-2">
-      <li>Music</li>
-      <li>Sports</li>
-      <li>Gaming</li>
-      <li>Movies</li>
-      <li>News</li>
-    </ul>
-    <h3 className="font-bold">More from You tube</h3>
-    <ul>
-      <li>Music</li>
-      <li>Sports</li>
-      <li>Gaming</li>
-      <li>Movies</li>
-      <li>News</li>
-    </ul>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          <Link to="#">Music</Link>
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          <Link to="#">Sports</Link>
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          <Link to="#">Gaming</Link>
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          <Link to="#">Movies</Link>
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          <Link to="#">News</Link>
+        </li>
+      </ul>
+      <h3 className="font-bold">Watch Later</h3>
+      <ul className="pl-1 mb-2">
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          <Link to="#">Music</Link>
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          <Link to="#">Sports</Link>
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          <Link to="#">Gaming</Link>
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          <Link to="#">Movies</Link>
+        </li>
+        <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
+          <Link to="#">News</Link>
+        </li>
+      </ul>
     </div>
-  )
-}
+  );
+};
 export default Sidebar;

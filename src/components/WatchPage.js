@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { closeMenu } from '../utils/appSlice';
 import { getNumber } from '../utils/baseHelper';
@@ -17,7 +17,7 @@ function WatchPage() {
   const dispatch = useDispatch();
   const [videoDetail, setVideoDetail] = useState();
   const [channelInfo, setChannelInfo]=useState();
-
+  const isDark = useSelector((store)=>store?.app?.isDark)
   useEffect(()=>{
     dispatch(closeMenu())
     getVideo()
@@ -43,7 +43,7 @@ function WatchPage() {
   }
   
   return !videoDetail ? null :  (
-    <div className='grid grid-cols-12 col-span-12 p-2'>
+    <div className={`grid grid-cols-12 col-span-12 p-2 ${isDark ? 'dark' : ''}`}>
       <div className='rounded-lg col-span-8 overflow-hidden'>
         <ReactPlayer 
           url={"https://www.youtube.com/watch?v="+videoId} 
@@ -52,7 +52,7 @@ function WatchPage() {
           className="mb-4"
           controls
         />
-        <h3 className='text-gray-600 font-bold text-2xl mt-4'>{videoDetail?.snippet?.title}</h3>
+        <h3 className={`${isDark ? "dark text-white-600 font-bold text-2xl mt-4" : "text-gray-600 font-bold text-2xl mt-4"} `}>{videoDetail?.snippet?.title}</h3>
         <div className='flex flex-wrap justify-between items-center py-2 my-2'>
           <div className='flex'>
             <img 

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
-import { toggleMenu } from "../utils/appSlice";
+import { toggleMenu, darkTheme } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_SUGGESTIONS } from "../utils/constants";
 import { cacheResult } from "../utils/searchSlice";
 import { Link } from "react-router-dom";
+import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 
 
 const Header = () => {
@@ -13,9 +14,13 @@ const Header = () => {
   const [searchSuggestion, setSearchSuggestion] = useState();
   const [showSuggestion, setShowSuggestion] = useState(false)
   const searchCache = useSelector((store) => store?.search);
+  const isDark = useSelector((store)=> store?.app?.isDark)
+  
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
+  
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,7 +49,7 @@ const Header = () => {
 
 
   return (
-    <div className="grid grid-flow-col shadow-md flex-wrap p-3 items-center justify-between">
+    <div className={`grid grid-flow-col shadow-md flex-wrap p-3 items-center justify-between ${isDark ? "dark shadow-white shadow-inner" : 'light'}`}>
       <div className="flex items-center col-span-1">
         <img
           onClick={() => handleToggleMenu()}
@@ -52,12 +57,14 @@ const Header = () => {
           alt="hamburger_menu"
           src="/hamburger.png"
         />
-        <img className="w-[100px] ml-4" alt="logo" src="/logo.png" />
+        <Link to='/'>
+          <img className="w-[100px] ml-4" alt="logo" src={isDark ? "/logo_dark.png": "/logo.png"} />
+        </Link>
       </div>
       <div className=" col-span-10">
         <div className="relative flex justify-center">
           <input
-            className="w-1/2 border border-gray-400 px-2 py-2 rounded-l-full "
+            className={`w-1/2 border border-gray-400 px-2 py-2 rounded-l-full ${isDark ? "dark": ""}`}
             type="text"
             placeholder="Search"
             value={searchInput}
@@ -69,11 +76,11 @@ const Header = () => {
               }
             }}
           />
-          <button className="bg-gray-300 text-black-700 px-3 py-2 rounded-r-full">
+          <button className={`bg-gray-300 border-[1px] text-black-700 px-3 py-2 rounded-r-full ${isDark ? "dark": ""}`}>
             <AiOutlineSearch />
           </button>
           {searchSuggestion && showSuggestion &&  (
-            <div className="absolute mt-11 w-[50%] bg-white shadow-md py-2 rounded-md">
+            <div className={`absolute mt-11 w-[50%] bg-white shadow-md py-2 rounded-md ${isDark ? "dark": ""}`}>
               <ul>
                 {searchSuggestion?.map((item,index) => (
                   <li className="w-full" 
@@ -90,7 +97,10 @@ const Header = () => {
           )}
         </div>
       </div>
-      <div className="col-span-1">
+      <div className="col-span-2 flex items-center justify-between">
+        <button className="bg-transparent text-lg" onClick={()=> dispatch(darkTheme())}>
+          {isDark === true ? <HiOutlineSun/> : <HiOutlineMoon/>}
+        </button>
         <AiOutlineUser className="w-8 h-8" />
       </div>
     </div>

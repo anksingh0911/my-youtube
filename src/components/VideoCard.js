@@ -23,4 +23,4 @@ const VideoCard = ({info})=> {
   )
 }
 
-export default VideoCard
+export default VideoCard;

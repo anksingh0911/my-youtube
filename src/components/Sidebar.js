@@ -15,38 +15,37 @@ const Sidebar = () => {
         location?.pathname === "/watch" ? `${`absolute top-18 left-0 w-[250px] p-2 shadow-md bg-white ${isDark ? "dark shadow-white": ""}`}`
           : `${`col-span-2 w-full p-2 bg-white ${isDark ? "dark shadow-white shadow-md" : "shadow-md"}`}`
       }
-      
     >
       <ul className="mb-2">
         <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
-          Home
+          <Link to="/"> Home </Link>
         </li>
         <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
-          Shorts
+          <Link to={"/results?search_query=shorts"}> Shorts </Link> 
         </li>
         <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
-          Library
+          <Link to={"/results?search_query=library"}>Library</Link>
         </li>
         <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
-          History
+          <Link to={"/results?search_query=history"}> History</Link>
         </li>
       </ul>
       <h3 className="font-bold">Subscription</h3>
       <ul className="pl-1 mb-2">
         <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
-          <Link to="#">Music</Link>
+          <Link to="/results?search_query=music">Music</Link>
         </li>
         <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
-          <Link to="#">Sports</Link>
+          <Link to="/results?search_query=sports">Sports</Link>
         </li>
         <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
-          <Link to="#">Gaming</Link>
+          <Link to="/results?search_query=gaming">Gaming</Link>
         </li>
         <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
-          <Link to="#">Movies</Link>
+          <Link to="/results?search_query=movies">Movies</Link>
         </li>
         <li className={`${isDark ? "hover:bg-gray-600" : "hover:bg-gray-200"} p-2 text-md hover:bg-gray-200 cursor-pointer`}>
-          <Link to="#">News</Link>
+          <Link to="/results?search_query=news">News</Link>
         </li>
       </ul>
       <h3 className="font-bold">Watch Later</h3>

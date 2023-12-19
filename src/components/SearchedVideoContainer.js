@@ -6,7 +6,6 @@ import SearchVideoItem from './SearchVideoItem'
 const SearchedVideoContainer = () => {
   const [searchParams]= useSearchParams();
   const [videosData, setVideosData] = useState()
-  console.log(searchParams.get("search_query"));
   const query = searchParams.get("search_query");
 
   useEffect(()=>{
